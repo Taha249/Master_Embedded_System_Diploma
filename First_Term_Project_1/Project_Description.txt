@@ -1,0 +1,25 @@
+---------Master Embedded System Diploma--------
+-----------------Taha Mohamed------------------
+
+Create a Pressure Controller
+A client expects to you to deliver the software of the following system:
+- Specification from the client:
+- A pressure controller informs the crew of a cabin with an alarm when the pressure exceeds 20 bars in the cabin.
+- The alarm duration equals 60 seconds.
+The system should have:
+1- Requirement Diagram
+2- System Analysis
+  - Use Case Diagram
+  - Activity Diagram
+  - Sequence Diagram
+3- System Design(Modules with its own state machines)
+4- You have write Embedded C codes consists of modules
+  - .c/.h files of each module
+  - MakeFile
+  - Startup.c
+  - Linker.ld
+5- In the driver.c file we provide the following APIS
+  - void Delay(int nCount);
+  - int detPressureVal();
+  - void Set_Alarm_actuator(int i);
+  - void GPIO_INITIALIZATION();

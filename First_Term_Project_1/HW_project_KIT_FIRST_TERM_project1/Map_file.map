@@ -1,0 +1,233 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+Alarm_actuator_state
+                    0x1               Alarm_actuator_driver.o
+PD_Pressure_Sensor  0x1               main.o
+PD_Alarm_actuator_state
+                    0x4               Alarm_actuator_driver.o
+PD_state_id         0x1               Alarm_monitor.o
+Main_ALG_status     0x1               main.o
+PD_alarm_monitor_state
+                    0x4               Alarm_monitor.o
+PD_Pressure_Sensor_driver_state
+                    0x4               Pressure_sensor_driver.o
+PD_Main_ALG_state   0x4               Main_ALG.o
+
+Discarded input sections
+
+ .debug_info    0x00000000      0x137 Alarm_actuator_driver.o
+ .debug_abbrev  0x00000000       0x92 Alarm_actuator_driver.o
+ .debug_loc     0x00000000       0xdc Alarm_actuator_driver.o
+ .debug_aranges
+                0x00000000       0x20 Alarm_actuator_driver.o
+ .debug_line    0x00000000       0x71 Alarm_actuator_driver.o
+ .debug_str     0x00000000      0x196 Alarm_actuator_driver.o
+ .debug_frame   0x00000000       0x90 Alarm_actuator_driver.o
+ .debug_info    0x00000000      0x128 Alarm_monitor.o
+ .debug_abbrev  0x00000000       0x92 Alarm_monitor.o
+ .debug_loc     0x00000000       0xb0 Alarm_monitor.o
+ .debug_aranges
+                0x00000000       0x20 Alarm_monitor.o
+ .debug_line    0x00000000       0x64 Alarm_monitor.o
+ .debug_str     0x00000000      0x197 Alarm_monitor.o
+ .debug_frame   0x00000000       0x7c Alarm_monitor.o
+ .debug_info    0x00000000      0x103 GPIO.o
+ .debug_abbrev  0x00000000       0x9d GPIO.o
+ .debug_loc     0x00000000       0xc8 GPIO.o
+ .debug_aranges
+                0x00000000       0x20 GPIO.o
+ .debug_line    0x00000000       0xd5 GPIO.o
+ .debug_str     0x00000000      0x147 GPIO.o
+ .debug_frame   0x00000000       0x78 GPIO.o
+ .debug_info    0x00000000      0x198 main.o
+ .debug_abbrev  0x00000000       0xa5 main.o
+ .debug_loc     0x00000000       0x58 main.o
+ .debug_aranges
+                0x00000000       0x20 main.o
+ .debug_line    0x00000000       0xb4 main.o
+ .debug_str     0x00000000      0x213 main.o
+ .debug_frame   0x00000000       0x48 main.o
+ .debug_info    0x00000000       0xff Main_ALG.o
+ .debug_abbrev  0x00000000       0x8b Main_ALG.o
+ .debug_loc     0x00000000       0x2c Main_ALG.o
+ .debug_aranges
+                0x00000000       0x20 Main_ALG.o
+ .debug_line    0x00000000       0x58 Main_ALG.o
+ .debug_str     0x00000000      0x178 Main_ALG.o
+ .debug_frame   0x00000000       0x2c Main_ALG.o
+ .debug_info    0x00000000      0x11e Pressure_sensor_driver.o
+ .debug_abbrev  0x00000000       0xa1 Pressure_sensor_driver.o
+ .debug_loc     0x00000000       0x84 Pressure_sensor_driver.o
+ .debug_aranges
+                0x00000000       0x20 Pressure_sensor_driver.o
+ .debug_line    0x00000000       0x70 Pressure_sensor_driver.o
+ .debug_str     0x00000000      0x1a2 Pressure_sensor_driver.o
+ .debug_frame   0x00000000       0x60 Pressure_sensor_driver.o
+ .debug_info    0x00000000      0x1a6 startup.o
+ .debug_abbrev  0x00000000       0xda startup.o
+ .debug_loc     0x00000000       0x64 startup.o
+ .debug_aranges
+                0x00000000       0x20 startup.o
+ .debug_line    0x00000000       0x69 startup.o
+ .debug_str     0x00000000      0x176 startup.o
+ .debug_frame   0x00000000       0x4c startup.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x00000000         0x00020000         xr
+sram             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00000000      0x474
+ *(.vectors*)
+ .vectors       0x00000000       0x10 startup.o
+                0x00000000                g_p_fn_Vectors
+ *(.text*)
+ .text          0x00000010       0x7c Alarm_actuator_driver.o
+                0x00000010                Alarm_monitor_init
+                0x0000001c                startAlarm
+                0x00000038                stopAlarm
+                0x00000054                ST_AlarmON
+                0x00000070                ST_AlarmOFF
+ .text          0x0000008c       0xa8 Alarm_monitor.o
+                0x0000008c                highpressure_detected
+                0x000000a8                ST_PD_alarmOFF
+                0x000000d4                ST_PD_alarmON
+                0x00000100                ST_PD_waiting
+ .text          0x00000134      0x10c GPIO.o
+                0x00000134                Delay
+                0x00000158                getPressureVal
+                0x00000170                Set_Alarm_actuator
+                0x000001c0                GPIO_INITIALIZATION
+ .text          0x00000240       0x8c main.o
+                0x00000240                setup
+                0x00000284                main
+ .text          0x000002cc       0x64 Main_ALG.o
+                0x000002cc                ST_PD_highpressure_detected
+ .text          0x00000330       0x88 Pressure_sensor_driver.o
+                0x00000330                Pressure_Sensor_driver_init
+                0x0000033c                ST_PD_reading
+                0x00000370                ST_PD_waitting
+ .text          0x000003b8       0xbc startup.o
+                0x000003b8                H_fault_Handler
+                0x000003b8                Default_Handler
+                0x000003b8                NMI_Handler
+                0x000003c4                Reset_Handler
+ *(.rodata*)
+                0x00000474                _E_text = .
+
+.glue_7         0x00000474        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00000474        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00000474        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00000474        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00000474        0x0
+ .iplt          0x00000000        0x0 Alarm_actuator_driver.o
+
+.rel.dyn        0x00000474        0x0
+ .rel.iplt      0x00000000        0x0 Alarm_actuator_driver.o
+
+.data           0x20000000        0x8 load address 0x00000474
+                0x20000000                _S_DATA = .
+ *(.data)
+ .data          0x20000000        0x0 Alarm_actuator_driver.o
+ .data          0x20000000        0x0 Alarm_monitor.o
+ .data          0x20000000        0x0 GPIO.o
+ .data          0x20000000        0x4 main.o
+                0x20000000                threshold
+ .data          0x20000004        0x4 Main_ALG.o
+ .data          0x20000008        0x0 Pressure_sensor_driver.o
+ .data          0x20000008        0x0 startup.o
+                0x20000008                _E_DATA = .
+
+.igot.plt       0x20000008        0x0 load address 0x0000047c
+ .igot.plt      0x00000000        0x0 Alarm_actuator_driver.o
+
+.bss            0x20000008      0x424 load address 0x0000047c
+                0x20000008                _S_bss = .
+ *(.bss*)
+ .bss           0x20000008        0x0 Alarm_actuator_driver.o
+ .bss           0x20000008        0x0 Alarm_monitor.o
+ .bss           0x20000008        0x0 GPIO.o
+ .bss           0x20000008        0x0 main.o
+ .bss           0x20000008        0x4 Main_ALG.o
+ .bss           0x2000000c        0x4 Pressure_sensor_driver.o
+ .bss           0x20000010      0x400 startup.o
+                0x20000410                . = ALIGN (0x4)
+                0x20000410                _E_bss = .
+ COMMON         0x20000410        0x8 Alarm_actuator_driver.o
+                0x20000410                Alarm_actuator_state
+                0x20000414                PD_Alarm_actuator_state
+ COMMON         0x20000418        0x8 Alarm_monitor.o
+                0x20000418                PD_state_id
+                0x2000041c                PD_alarm_monitor_state
+ COMMON         0x20000420        0x2 main.o
+                0x20000420                PD_Pressure_Sensor
+                0x20000421                Main_ALG_status
+ *fill*         0x20000422        0x2 
+ COMMON         0x20000424        0x4 Main_ALG.o
+                0x20000424                PD_Main_ALG_state
+ COMMON         0x20000428        0x4 Pressure_sensor_driver.o
+                0x20000428                PD_Pressure_Sensor_driver_state
+LOAD Alarm_actuator_driver.o
+LOAD Alarm_monitor.o
+LOAD GPIO.o
+LOAD main.o
+LOAD Main_ALG.o
+LOAD Pressure_sensor_driver.o
+LOAD startup.o
+OUTPUT(Pressure_Controller_TM.elf elf32-littlearm)
+
+.debug_info
+
+.debug_abbrev
+
+.debug_loc
+
+.debug_aranges
+
+.debug_line
+
+.debug_str
+
+.comment        0x00000000       0x11
+ .comment       0x00000000       0x11 Alarm_actuator_driver.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 Alarm_monitor.o
+ .comment       0x00000000       0x12 GPIO.o
+ .comment       0x00000000       0x12 main.o
+ .comment       0x00000000       0x12 Main_ALG.o
+ .comment       0x00000000       0x12 Pressure_sensor_driver.o
+ .comment       0x00000000       0x12 startup.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 Alarm_actuator_driver.o
+ .ARM.attributes
+                0x00000033       0x33 Alarm_monitor.o
+ .ARM.attributes
+                0x00000066       0x33 GPIO.o
+ .ARM.attributes
+                0x00000099       0x33 main.o
+ .ARM.attributes
+                0x000000cc       0x33 Main_ALG.o
+ .ARM.attributes
+                0x000000ff       0x33 Pressure_sensor_driver.o
+ .ARM.attributes
+                0x00000132       0x33 startup.o
+
+.debug_frame
