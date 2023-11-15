@@ -1,0 +1,20 @@
+-------First Term Project NO.2--------
+-----------BY Taha Mohamed------------
+
+Write a program to build a simple Software for Students Information Management System which can perform the following operations:
+1- Store the First name of the student.
+2- Store the Last name of the student.
+3- Store the unique Roll number for every student.
+4- Store the GPA of every student.
+5- Store the courses registered by the student.
+
+Approach
+The idea is to form an individual functions for every operation. All the functions are unified together to form software.
+1- Add Student Details from file.
+2- Add Studnet Details manually.
+3- Find the student by given the roll number.
+4- Find the student by given the first name.
+5- Find the students registered in a course.
+6- Count of students.
+7- Delete a student.
+8- Update student.

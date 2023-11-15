@@ -1,0 +1,4 @@
+Belal Mohamed 180456 3.7 2 Math Physics
+Gamal Ahmed 170567 2.9 3 Control Robotics2 Mechanics
+Islam Mohamed 181033 3.9 4 Structure Drawing Material Applied
+Amr Khaled 190654 4 5 Robotics Mechanics2 Math3 Robotics Movement
