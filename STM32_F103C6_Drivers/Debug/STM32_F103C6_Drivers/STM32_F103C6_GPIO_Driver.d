@@ -1,0 +1,8 @@
+STM32_F103C6_Drivers/STM32_F103C6_GPIO_Driver.o: \
+ ../STM32_F103C6_Drivers/STM32_F103C6_GPIO_Driver.c \
+ D:/Master_Embedded_System_Diploma/Second_term/Unit_7_MCU_Essential_Peripherals/Unit_7_MCU_Essential_Peripherals_GPIO_Part_3/Section_lab/DRIVERS/STM32_F103C6_Drivers/Inc/STM32_F103C6_GPIO_Driver.h \
+ D:/Master_Embedded_System_Diploma/Second_term/Unit_7_MCU_Essential_Peripherals/Unit_7_MCU_Essential_Peripherals_GPIO_Part_3/Section_lab/DRIVERS/STM32_F103C6_Drivers/Inc/stm32f103x6.h
+
+D:/Master_Embedded_System_Diploma/Second_term/Unit_7_MCU_Essential_Peripherals/Unit_7_MCU_Essential_Peripherals_GPIO_Part_3/Section_lab/DRIVERS/STM32_F103C6_Drivers/Inc/STM32_F103C6_GPIO_Driver.h:
+
+D:/Master_Embedded_System_Diploma/Second_term/Unit_7_MCU_Essential_Peripherals/Unit_7_MCU_Essential_Peripherals_GPIO_Part_3/Section_lab/DRIVERS/STM32_F103C6_Drivers/Inc/stm32f103x6.h:
