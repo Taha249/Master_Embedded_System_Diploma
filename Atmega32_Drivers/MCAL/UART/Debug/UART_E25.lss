@@ -1,0 +1,189 @@
+
+UART_E25.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000f0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000a  00800060  000000f0  00000164  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000016e  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001a0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  000001dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000006d8  00000000  00000000  00000234  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000060d  00000000  00000000  0000090c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000001c0  00000000  00000000  00000f19  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000088  00000000  00000000  000010dc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000325  00000000  00000000  00001164  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000a1  00000000  00000000  00001489  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000038  00000000  00000000  0000152a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 ef       	ldi	r30, 0xF0	; 240
+  68:	f0 e0       	ldi	r31, 0x00	; 0
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	aa 36       	cpi	r26, 0x6A	; 106
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 76 00 	jmp	0xec	; 0xec <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#include "UART.h"
+
+
+int main(void)
+{
+	DDRC |= (1<<7);
+  82:	a7 9a       	sbi	0x14, 7	; 20
+	Uart_Init();
+  84:	0e 94 50 00 	call	0xa0	; 0xa0 <Uart_Init>
+	Uart_TransmitString("Eng.Taha");
+  88:	80 e6       	ldi	r24, 0x60	; 96
+  8a:	90 e0       	ldi	r25, 0x00	; 0
+  8c:	0e 94 60 00 	call	0xc0	; 0xc0 <Uart_TransmitString>
+	while (1)
+	{
+		if(Uart_Receive() == '1'){
+  90:	0e 94 5c 00 	call	0xb8	; 0xb8 <Uart_Receive>
+  94:	81 33       	cpi	r24, 0x31	; 49
+  96:	e1 f7       	brne	.-8      	; 0x90 <main+0xe>
+			PORTC ^= (1<<7);
+  98:	85 b3       	in	r24, 0x15	; 21
+  9a:	80 58       	subi	r24, 0x80	; 128
+  9c:	85 bb       	out	0x15, r24	; 21
+  9e:	f8 cf       	rjmp	.-16     	; 0x90 <main+0xe>
+
+000000a0 <Uart_Init>:
+*  Author: user
+*/
+#include "UART.h"
+
+void Uart_Init(){
+	UCSRB = (1<<TXEN)|(1<<RXEN);//enable TX & RX
+  a0:	88 e1       	ldi	r24, 0x18	; 24
+  a2:	8a b9       	out	0x0a, r24	; 10
+	UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);//8 BITS
+  a4:	86 e8       	ldi	r24, 0x86	; 134
+  a6:	80 bd       	out	0x20, r24	; 32
+	UBRRL = MyUBRR;
+  a8:	87 e6       	ldi	r24, 0x67	; 103
+  aa:	89 b9       	out	0x09, r24	; 9
+	UBRRH = MyUBRR >> 8;
+  ac:	10 bc       	out	0x20, r1	; 32
+  ae:	08 95       	ret
+
+000000b0 <Uart_Transmit>:
+}
+void Uart_Transmit(char data){
+	while (!(UCSRA & (1<<UDRE)));//waiting UDR to be empty
+  b0:	5d 9b       	sbis	0x0b, 5	; 11
+  b2:	fe cf       	rjmp	.-4      	; 0xb0 <Uart_Transmit>
+	UDR = data;
+  b4:	8c b9       	out	0x0c, r24	; 12
+  b6:	08 95       	ret
+
+000000b8 <Uart_Receive>:
+}
+char Uart_Receive(){
+	while (!(UCSRA & (1<<RXC)));//waiting receive to complete
+  b8:	5f 9b       	sbis	0x0b, 7	; 11
+  ba:	fe cf       	rjmp	.-4      	; 0xb8 <Uart_Receive>
+	return UDR;
+  bc:	8c b1       	in	r24, 0x0c	; 12
+}
+  be:	08 95       	ret
+
+000000c0 <Uart_TransmitString>:
+void Uart_TransmitString(char * string){
+  c0:	0f 93       	push	r16
+  c2:	1f 93       	push	r17
+  c4:	cf 93       	push	r28
+  c6:	fc 01       	movw	r30, r24
+	unsigned char i = 0;
+	while(string[i] != '\0'){
+  c8:	80 81       	ld	r24, Z
+  ca:	88 23       	and	r24, r24
+  cc:	59 f0       	breq	.+22     	; 0xe4 <Uart_TransmitString+0x24>
+  ce:	8f 01       	movw	r16, r30
+  d0:	c0 e0       	ldi	r28, 0x00	; 0
+		Uart_Transmit(string[i]);
+  d2:	0e 94 58 00 	call	0xb0	; 0xb0 <Uart_Transmit>
+		i++;
+  d6:	cf 5f       	subi	r28, 0xFF	; 255
+	while (!(UCSRA & (1<<RXC)));//waiting receive to complete
+	return UDR;
+}
+void Uart_TransmitString(char * string){
+	unsigned char i = 0;
+	while(string[i] != '\0'){
+  d8:	f8 01       	movw	r30, r16
+  da:	ec 0f       	add	r30, r28
+  dc:	f1 1d       	adc	r31, r1
+  de:	80 81       	ld	r24, Z
+  e0:	81 11       	cpse	r24, r1
+  e2:	f7 cf       	rjmp	.-18     	; 0xd2 <Uart_TransmitString+0x12>
+		Uart_Transmit(string[i]);
+		i++;
+	}
+  e4:	cf 91       	pop	r28
+  e6:	1f 91       	pop	r17
+  e8:	0f 91       	pop	r16
+  ea:	08 95       	ret
+
+000000ec <_exit>:
+  ec:	f8 94       	cli
+
+000000ee <__stop_program>:
+  ee:	ff cf       	rjmp	.-2      	; 0xee <__stop_program>
