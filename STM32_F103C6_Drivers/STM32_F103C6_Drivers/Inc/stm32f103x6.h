@@ -62,6 +62,9 @@
 //USART1
 #define USART1_BASE                                 0x40013800UL
 
+//SPI1
+#define SPI1_BASE                                   0x40013000UL
+
 /*============Base addresses for APB1 Peripherals============*/
 
 //USART2
@@ -69,6 +72,10 @@
 
 //USART3
 #define USART3_BASE                                 0x40004800UL
+
+//SPI2
+#define SPI2_BASE                                   0x40003800UL
+
 
 /*<--------------------------------------------------------------------------------------------------------->*/
 
@@ -145,6 +152,23 @@ typedef struct
   volatile uint32_t GTPR;
 } USART_TypeDef;
 
+
+/*============Peripheral register: SPI============*/
+
+typedef struct
+{
+  volatile uint32_t SPI_CR1;
+  volatile uint32_t SPI_CR2;
+  volatile uint32_t SPI_SR;
+  volatile uint32_t SPI_DR;
+  volatile uint32_t SPI_CRCPR;
+  volatile uint32_t SPI_RXCRCR;
+  volatile uint32_t SPI_TXCRCR;
+  volatile uint32_t SPI_I2SCFGR;
+  volatile uint32_t SPI_I2SPR;
+
+} SPI_TypeDef;
+
 /*<--------------------------------------------------------------------------------------------------------->*/
 
 /*============Peripheral Instants============*/
@@ -163,6 +187,9 @@ typedef struct
 #define USART2                      ((USART_TypeDef*)USART2_BASE)
 #define USART3                      ((USART_TypeDef*)USART3_BASE)
 
+#define SPI1                        ((SPI_TypeDef*)SPI1_BASE)
+#define SPI2                        ((SPI_TypeDef*)SPI2_BASE)
+
 
 /*<--------------------------------------------------------------------------------------------------------->*/
 
@@ -179,11 +206,17 @@ typedef struct
 #define RCC_USART2_CLK_EN()         ( RCC->APB1ENR |= (1<<17) )
 #define RCC_USART3_CLK_EN()	        ( RCC->APB1ENR |= (1<<18) )
 
+#define RCC_SPI1_CLK_EN()			(RCC->APB2ENR |= 1<<12)
+#define RCC_SPI2_CLK_EN()			(RCC->APB1ENR |= 1<<14)
+
 
 //RCC_Reset
 #define RCC_USART1_Reset()	        ( RCC->APB2RSTR |= (1<<14) )
 #define RCC_USART2_Reset()	        ( RCC->APB1RSTR |= (1<<17) )
 #define RCC_USART3_Reset()	        ( RCC->APB1RSTR |= (1<<18) )
+
+#define RCC_SPI1_Reset()			(RCC->APB2RSTR |= 1<<12)
+#define RCC_SPI2_Reset()			(RCC->APB1RSTR |= 1<<14)
 
 
 /*<--------------------------------------------------------------------------------------------------------->*/
@@ -229,6 +262,10 @@ typedef struct
 #define USART2_IRQ		38
 #define USART3_IRQ		39
 
+#define SPI1_IRQ        35
+#define SPI2_IRQ        36
+
+
 /*<--------------------------------------------------------------------------------------------------------->*/
 
 /*============NVIC IRQ MACROS ENABLE & DISABLE============*/
@@ -259,6 +296,12 @@ typedef struct
 #define NVIC_IRQ38_USART2_DISABLE  	                (NVIC_ICER1 |= 1<<( USART2_IRQ- 32 )) //IRQ-32
 #define NVIC_IRQ39_USART3_DISABLE   	            (NVIC_ICER1 |= 1<<( USART3_IRQ- 32 )) //IRQ-32
 
+//SPI
+#define NVIC_IRQ35_SPI1_ENABLE 			            (NVIC_ISER1 |= 1<<( SPI1_IRQ- 32 )) //IRQ-32
+#define NVIC_IRQ36_SPI2_ENABLE 			            (NVIC_ISER1 |= 1<<( SPI2_IRQ- 32 )) //IRQ-32
+
+#define NVIC_IRQ35_SPI1_DISABLE  			        (NVIC_ICER1 |= 1<<( SPI1_IRQ- 32 ))
+#define NVIC_IRQ36_SPI2_DISABLE  			        (NVIC_ICER1 |= 1<<( SPI2_IRQ- 32 ))
 
 /*<--------------------------------------------------------------------------------------------------------->*/
 

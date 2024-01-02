@@ -3,6 +3,7 @@
 "STM32_F103C6_Drivers/STM32_F103C6_EXTI_Driver.o"
 "STM32_F103C6_Drivers/STM32_F103C6_GPIO_Driver.o"
 "STM32_F103C6_Drivers/STM32_F103C6_RCC_Driver.o"
+"STM32_F103C6_Drivers/STM32_F103C6_SPI_Driver.o"
 "STM32_F103C6_Drivers/STM32_F103C6_USART_Driver.o"
 "Src/main.o"
 "Src/syscalls.o"

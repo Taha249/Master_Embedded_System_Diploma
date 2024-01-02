@@ -209,7 +209,7 @@ void MCAL_UART_ReceiveData	(USART_TypeDef *USARTx, uint16_t *pRxBuffer ,enum Pol
 	//wait until RXNE flag is set in the SR
 	if (PollingEn == enable)
 	{
-		while( ! (USARTx->SR & 1<<5 ));
+ 		while( ! (USARTx->SR & 1<<5 ));
 	}
 
 	//Check the USART_WordLength item for 9BIT or 8BIT in a frame
