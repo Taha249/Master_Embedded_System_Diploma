@@ -1,0 +1,275 @@
+
+I2C_Master.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000014a  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000019e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000019e  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001d0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  0000020c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000077e  00000000  00000000  00000264  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000638  00000000  00000000  000009e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000327  00000000  00000000  0000101a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000078  00000000  00000000  00001344  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000035e  00000000  00000000  000013bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000e1  00000000  00000000  0000171a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000038  00000000  00000000  000017fb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 5d 00 	call	0xba	; 0xba <main>
+  64:	0c 94 a3 00 	jmp	0x146	; 0x146 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <I2C_INIT>:
+ * This function configures the I2C peripheral to operate with the given SCL clock frequency.
+ * It calculates the appropriate prescaler value based on the provided clock frequency.
+ *******************************************************************************/
+
+void I2C_INIT(unsigned long SCL_Clock)
+{
+  6c:	9b 01       	movw	r18, r22
+  6e:	ac 01       	movw	r20, r24
+    TWBR = (unsigned char)(((F_CPU / SCL_Clock) - 16) / (2 * prescaler));
+  70:	60 e0       	ldi	r22, 0x00	; 0
+  72:	74 e2       	ldi	r23, 0x24	; 36
+  74:	84 ef       	ldi	r24, 0xF4	; 244
+  76:	90 e0       	ldi	r25, 0x00	; 0
+  78:	0e 94 81 00 	call	0x102	; 0x102 <__udivmodsi4>
+  7c:	da 01       	movw	r26, r20
+  7e:	c9 01       	movw	r24, r18
+  80:	40 97       	sbiw	r24, 0x10	; 16
+  82:	a1 09       	sbc	r26, r1
+  84:	b1 09       	sbc	r27, r1
+  86:	b6 95       	lsr	r27
+  88:	a7 95       	ror	r26
+  8a:	97 95       	ror	r25
+  8c:	87 95       	ror	r24
+  8e:	80 b9       	out	0x00, r24	; 0
+		        break;
+		case 64 :
+		        TWSR=3;
+		        break;
+		default :
+		        TWSR=0;
+  90:	11 b8       	out	0x01, r1	; 1
+  92:	08 95       	ret
+
+00000094 <I2C_START>:
+ * It waits for the completion of the START condition transmission.
+ *******************************************************************************/
+
+void I2C_START(void)
+{
+    TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
+  94:	84 ea       	ldi	r24, 0xA4	; 164
+  96:	86 bf       	out	0x36, r24	; 54
+    while ((TWCR & (1 << TWINT)) == 0); // Wait for the completion of the START condition transmission
+  98:	06 b6       	in	r0, 0x36	; 54
+  9a:	07 fe       	sbrs	r0, 7
+  9c:	fd cf       	rjmp	.-6      	; 0x98 <I2C_START+0x4>
+    while ((TWSR) != 0x08);              // Start Condition has Been Transmitted
+  9e:	81 b1       	in	r24, 0x01	; 1
+  a0:	88 30       	cpi	r24, 0x08	; 8
+  a2:	e9 f7       	brne	.-6      	; 0x9e <I2C_START+0xa>
+}
+  a4:	08 95       	ret
+
+000000a6 <I2C_WRITE>:
+ * This function writes a byte onto the I2C bus. It waits for the completion of the write operation.
+ *******************************************************************************/
+
+void I2C_WRITE(unsigned char cByte)
+{
+    TWDR = cByte;
+  a6:	83 b9       	out	0x03, r24	; 3
+    TWCR = (1 << TWINT) | (1 << TWEN);
+  a8:	84 e8       	ldi	r24, 0x84	; 132
+  aa:	86 bf       	out	0x36, r24	; 54
+    while ((TWCR & 0x80) == 0); // Wait for the completion of the write operation
+  ac:	06 b6       	in	r0, 0x36	; 54
+  ae:	07 fe       	sbrs	r0, 7
+  b0:	fd cf       	rjmp	.-6      	; 0xac <I2C_WRITE+0x6>
+}
+  b2:	08 95       	ret
+
+000000b4 <I2C_STOP>:
+ * This function sends the STOP condition to terminate communication on the I2C bus.
+ *******************************************************************************/
+
+void I2C_STOP()
+{
+    TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
+  b4:	84 e9       	ldi	r24, 0x94	; 148
+  b6:	86 bf       	out	0x36, r24	; 54
+  b8:	08 95       	ret
+
+000000ba <main>:
+
+
+int main(void)
+{
+    unsigned char ch = 0;
+    I2C_INIT(0x48);
+  ba:	68 e4       	ldi	r22, 0x48	; 72
+  bc:	70 e0       	ldi	r23, 0x00	; 0
+  be:	80 e0       	ldi	r24, 0x00	; 0
+  c0:	90 e0       	ldi	r25, 0x00	; 0
+  c2:	0e 94 36 00 	call	0x6c	; 0x6c <I2C_INIT>
+#include "I2C.h"
+
+
+int main(void)
+{
+    unsigned char ch = 0;
+  c6:	c0 e0       	ldi	r28, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  c8:	2f ef       	ldi	r18, 0xFF	; 255
+  ca:	81 ee       	ldi	r24, 0xE1	; 225
+  cc:	94 e0       	ldi	r25, 0x04	; 4
+  ce:	21 50       	subi	r18, 0x01	; 1
+  d0:	80 40       	sbci	r24, 0x00	; 0
+  d2:	90 40       	sbci	r25, 0x00	; 0
+  d4:	e1 f7       	brne	.-8      	; 0xce <main+0x14>
+  d6:	00 c0       	rjmp	.+0      	; 0xd8 <main+0x1e>
+  d8:	00 00       	nop
+    while (1)
+    {
+	  _delay_ms(100);
+
+	    // Transmit Start Condition
+	    I2C_START();
+  da:	0e 94 4a 00 	call	0x94	; 0x94 <I2C_START>
+	    
+	    // Transmit SLA + W(0)
+	    I2C_WRITE(0b11010000 + 0);
+  de:	80 ed       	ldi	r24, 0xD0	; 208
+  e0:	0e 94 53 00 	call	0xa6	; 0xa6 <I2C_WRITE>
+	    while ((TWSR) != 0x18);  // Wait for SLA + W(0) transmission completion and ACK reception
+  e4:	81 b1       	in	r24, 0x01	; 1
+  e6:	88 31       	cpi	r24, 0x18	; 24
+  e8:	e9 f7       	brne	.-6      	; 0xe4 <main+0x2a>
+	    
+	    // Transmit Data
+	    I2C_WRITE(ch++);
+  ea:	d1 e0       	ldi	r29, 0x01	; 1
+  ec:	dc 0f       	add	r29, r28
+  ee:	8c 2f       	mov	r24, r28
+  f0:	0e 94 53 00 	call	0xa6	; 0xa6 <I2C_WRITE>
+	    while ((TWSR) != 0x28);  // Wait for Data transmission completion and ACK reception
+  f4:	81 b1       	in	r24, 0x01	; 1
+  f6:	88 32       	cpi	r24, 0x28	; 40
+  f8:	e9 f7       	brne	.-6      	; 0xf4 <main+0x3a>
+	    
+	    // Transmit Stop condition
+	    I2C_STOP();
+  fa:	0e 94 5a 00 	call	0xb4	; 0xb4 <I2C_STOP>
+	    // Transmit SLA + W(0)
+	    I2C_WRITE(0b11010000 + 0);
+	    while ((TWSR) != 0x18);  // Wait for SLA + W(0) transmission completion and ACK reception
+	    
+	    // Transmit Data
+	    I2C_WRITE(ch++);
+  fe:	cd 2f       	mov	r28, r29
+	    while ((TWSR) != 0x28);  // Wait for Data transmission completion and ACK reception
+	    
+	    // Transmit Stop condition
+	    I2C_STOP();
+    }
+ 100:	e3 cf       	rjmp	.-58     	; 0xc8 <main+0xe>
+
+00000102 <__udivmodsi4>:
+ 102:	a1 e2       	ldi	r26, 0x21	; 33
+ 104:	1a 2e       	mov	r1, r26
+ 106:	aa 1b       	sub	r26, r26
+ 108:	bb 1b       	sub	r27, r27
+ 10a:	fd 01       	movw	r30, r26
+ 10c:	0d c0       	rjmp	.+26     	; 0x128 <__udivmodsi4_ep>
+
+0000010e <__udivmodsi4_loop>:
+ 10e:	aa 1f       	adc	r26, r26
+ 110:	bb 1f       	adc	r27, r27
+ 112:	ee 1f       	adc	r30, r30
+ 114:	ff 1f       	adc	r31, r31
+ 116:	a2 17       	cp	r26, r18
+ 118:	b3 07       	cpc	r27, r19
+ 11a:	e4 07       	cpc	r30, r20
+ 11c:	f5 07       	cpc	r31, r21
+ 11e:	20 f0       	brcs	.+8      	; 0x128 <__udivmodsi4_ep>
+ 120:	a2 1b       	sub	r26, r18
+ 122:	b3 0b       	sbc	r27, r19
+ 124:	e4 0b       	sbc	r30, r20
+ 126:	f5 0b       	sbc	r31, r21
+
+00000128 <__udivmodsi4_ep>:
+ 128:	66 1f       	adc	r22, r22
+ 12a:	77 1f       	adc	r23, r23
+ 12c:	88 1f       	adc	r24, r24
+ 12e:	99 1f       	adc	r25, r25
+ 130:	1a 94       	dec	r1
+ 132:	69 f7       	brne	.-38     	; 0x10e <__udivmodsi4_loop>
+ 134:	60 95       	com	r22
+ 136:	70 95       	com	r23
+ 138:	80 95       	com	r24
+ 13a:	90 95       	com	r25
+ 13c:	9b 01       	movw	r18, r22
+ 13e:	ac 01       	movw	r20, r24
+ 140:	bd 01       	movw	r22, r26
+ 142:	cf 01       	movw	r24, r30
+ 144:	08 95       	ret
+
+00000146 <_exit>:
+ 146:	f8 94       	cli
+
+00000148 <__stop_program>:
+ 148:	ff cf       	rjmp	.-2      	; 0x148 <__stop_program>
