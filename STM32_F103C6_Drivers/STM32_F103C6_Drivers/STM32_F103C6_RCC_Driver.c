@@ -75,11 +75,8 @@ uint32_t MCAL_RCC_GetSYS_CLCKFreq(void)
 		//todo need to calculate  it PLLCLK and PLLMUL & PLL Source MUX
 		return 16000000 ;
 		break ;
-
 	}
-
 }
-
 
 uint32_t MCAL_RCC_GetHCLKFreq(void)
 {
